@@ -11,14 +11,14 @@
 	<div class="form-group" >
 	<form action="" method="post">
 	<h2>Kontakt 1</h2><br /> 
-	Odgovorna osoba: <input type="text" name="individualName1"><br />
-	Naziv organizacije: <input type="text" name="organisationName1"><br />
-	Pozicija: <input type="text" name="positionName1"><br /><br /><br />
+	<input placeholder="Odgovorna osoba" type="text" name="individualName1" class="form-control"><br />
+	<input placeholder="Naziv organizacije"type="text" name="organisationName1" class="form-control"><br />
+	<input placeholder="Pozicija"type="text" name="positionName1" class="form-control"><br /><br /><br />
 	
 	<h2>Kontakt 2</h2><br /> 
-	Odgovorna osoba: <input type="text" name="individualName2"><br />
-	Naziv organizacije: <input type="text" name="organisationName2"><br />
-	Pozicija: <input type="text" name="positionName2"><br /><br /><br />
+	<input placeholder="Odgovorna osoba" type="text" name="individualName2" class="form-control"><br />
+	<input placeholder="Naziv organizacije" type="text" name="organisationName2" class="form-control"><br />
+	<input placeholder="Pozicija" type="text" name="positionName2" class="form-control"><br /><br /><br />
 	
 	<h2>Conformity</h2>
 	<input type="radio" name="conformity" value="conformant"> Conformant<br />
@@ -160,7 +160,7 @@
                         <gco:Boolean>false</gco:Boolean>
                      </gmd:pass>';
 		} elseif(($_POST['conformity']) == 'notEvaluated') {
-			$pass = '<gmd:Pass gco:nilReason "unknown"/>';
+			$pass = '<gmd:Pass gco:nilReason="unknown"/>';
 		} else {
 			$pass = '';
 		}
