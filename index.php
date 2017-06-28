@@ -13,12 +13,17 @@
 	<h2>Kontakt 1</h2><br /> 
 	Odgovorna osoba: <input type="text" name="individualName1"><br />
 	Naziv organizacije: <input type="text" name="organisationName1"><br />
-	Pozicija: <input type="text" name="positionName1"><br /><br /><br /><br />
+	Pozicija: <input type="text" name="positionName1"><br /><br /><br />
 	
 	<h2>Kontakt 2</h2><br /> 
 	Odgovorna osoba: <input type="text" name="individualName2"><br />
 	Naziv organizacije: <input type="text" name="organisationName2"><br />
-	Pozicija: <input type="text" name="positionName2"><br />
+	Pozicija: <input type="text" name="positionName2"><br /><br /><br />
+	
+	<h2>Conformity</h2>
+	<input type="radio" name="conformity" value="conformant"> Conformant<br />
+	<input type="radio" name="conformity" value="nonConformant"> Non-Conformant<br />
+	<input type="radio" name="conformity" value="notEvaluated" checked = "checked"> Not Evaluated<br /><br /><br />
 	
 	
 		
@@ -141,6 +146,23 @@
   ';
 		} else {
 			$secondContact = '';
+		}
+		
+		
+		//conformity
+		if(($_POST['conformity']) == 'conformant')
+		{
+			$pass = '<gmd:pass>
+                        <gco:Boolean>true</gco:Boolean>
+                     </gmd:pass>';
+		} elseif(($_POST['conformity']) == 'nonConformant') {
+			$pass = '<gmd:pass>
+                        <gco:Boolean>false</gco:Boolean>
+                     </gmd:pass>';
+		} elseif(($_POST['conformity']) == 'notEvaluated') {
+			$pass = '<gmd:Pass gco:nilReason "unknown"/>';
+		} else {
+			$pass = '';
 		}
 		
 		
@@ -534,9 +556,7 @@
                      <gmd:explanation gco:nilReason="missing">
                         <gco:CharacterString/>
                      </gmd:explanation>
-                     <gmd:pass>
-                        <gco:Boolean>true</gco:Boolean>
-                     </gmd:pass>
+                     '.$pass.'
                   </gmd:DQ_ConformanceResult>
                </gmd:result>
             </gmd:DQ_DomainConsistency>
