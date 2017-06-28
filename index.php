@@ -13,7 +13,14 @@
 	<h2>Kontakt 1</h2><br /> 
 	Odgovorna osoba: <input type="text" name="individualName1"><br />
 	Naziv organizacije: <input type="text" name="organisationName1"><br />
-	Pozicija: <input type="text" name="positionName1"><br />
+	Pozicija: <input type="text" name="positionName1"><br /><br /><br /><br />
+	
+	<h2>Kontakt 2</h2><br /> 
+	Odgovorna osoba: <input type="text" name="individualName2"><br />
+	Naziv organizacije: <input type="text" name="organisationName2"><br />
+	Pozicija: <input type="text" name="positionName2"><br />
+	
+	
 		
 	<input type="submit" name ="submit">
 	</form>
@@ -22,11 +29,13 @@
 
 	if(isset($_POST['submit']))
 	{
+		//prvi kontakt
 		if (strlen ($_POST['individualName1']) > 0)
 		{
 		$individualName1 = '<gmd:individualName>
             <gco:CharacterString>'.$_POST['individualName1'].'</gco:CharacterString>
-         </gmd:individualName>';
+         </gmd:individualName>
+		 ';
 		} else {
 			$individualName1 = '';
 		}
@@ -35,7 +44,8 @@
 		{
 		$organisationName1 = '<gmd:organisationName>
             <gco:CharacterString>'.$_POST['organisationName1'].'</gco:CharacterString>
-         </gmd:organisationName>';
+         </gmd:organisationName>
+		 ';
 		} else {
 			$organisationName1 = '';
 		}
@@ -47,6 +57,90 @@
          </gmd:positionName>';
 		} else {
 			$positionName1 = '';
+		}
+		
+		
+		
+		//drugi kontakt
+		if (strlen ($_POST['individualName2']) > 0)
+		{
+		$individualName2 = '<gmd:individualName>
+            <gco:CharacterString>'.$_POST['individualName2'].'</gco:CharacterString>
+         </gmd:individualName>
+		 ';
+		} else {
+			$individualName2 = '';
+		}
+		
+		if (strlen ($_POST['organisationName2']) > 0)
+		{
+		$organisationName2 = '<gmd:organisationName>
+            <gco:CharacterString>'.$_POST['organisationName2'].'</gco:CharacterString>
+         </gmd:organisationName>
+		 ';
+		} else {
+			$organisationName2 = '';
+		}
+		
+		if (strlen ($_POST['positionName2']) > 0)
+		{
+		$positionName2 = '<gmd:positionName>
+            <gco:CharacterString>'.$_POST['positionName2'].'</gco:CharacterString>
+         </gmd:positionName>';
+		} else {
+			$positionName2 = '';
+		}
+		
+		if (((strlen ($individualName2)) > 0) or ((strlen ($organisationName2)) > 0) or ((strlen ($positionName2)) > 0))
+		{
+			$secondContact = '<gmd:contact>
+      <gmd:CI_ResponsibleParty>
+         '.$individualName2.$organisationName2.$positionName2.'
+         <gmd:contactInfo>
+            <gmd:CI_Contact>
+               <gmd:phone>
+                  <gmd:CI_Telephone>
+                     <gmd:voice>
+                        <gco:CharacterString>4806-295</gco:CharacterString>
+                     </gmd:voice>
+                     <gmd:facsimile gco:nilReason="missing">
+                        <gco:CharacterString/>
+                     </gmd:facsimile>
+                  </gmd:CI_Telephone>
+               </gmd:phone>
+               <gmd:address>
+                  <gmd:CI_Address>
+                     <gmd:deliveryPoint>
+                        <gco:CharacterString>Ilica 3</gco:CharacterString>
+                     </gmd:deliveryPoint>
+                     <gmd:city>
+                        <gco:CharacterString>Zagreb</gco:CharacterString>
+                     </gmd:city>
+                     <gmd:administrativeArea>
+                        <gco:CharacterString>Država</gco:CharacterString>
+                     </gmd:administrativeArea>
+                     <gmd:postalCode>
+                        <gco:CharacterString>10000</gco:CharacterString>
+                     </gmd:postalCode>
+                     <gmd:country>
+                        <gco:CharacterString>Hrvatska</gco:CharacterString>
+                     </gmd:country>
+                     <gmd:electronicMailAddress>
+                        <gco:CharacterString>kristofm@dzs.hr</gco:CharacterString>
+                     </gmd:electronicMailAddress>
+                  </gmd:CI_Address>
+               </gmd:address>
+            </gmd:CI_Contact>
+         </gmd:contactInfo>
+         <gmd:role>
+            <gmd:CI_RoleCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_RoleCode"
+                             codeListValue="owner"/>
+         </gmd:role>
+      </gmd:CI_ResponsibleParty>
+  </gmd:contact>
+  ';
+		} else {
+			$secondContact = '';
 		}
 		
 		
@@ -118,7 +212,7 @@
          </gmd:role>
       </gmd:CI_ResponsibleParty>
   </gmd:contact>
-  <gmd:dateStamp>
+  '.$secondContact.'<gmd:dateStamp>
       <gco:Date>2016-04-20</gco:Date>
   </gmd:dateStamp>
   <gmd:referenceSystemInfo>
